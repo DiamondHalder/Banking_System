@@ -1,5 +1,5 @@
 import csv
-from member1_account.entity import Account
+from account.entity import Account
 
 class DataStorage:
     
