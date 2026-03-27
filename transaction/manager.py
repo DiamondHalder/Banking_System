@@ -36,4 +36,4 @@ class TransactionManager:
                     print("Transfer Successful!")
                 else: print("Error: Invalid PIN.")
             else: print("Error: Insufficient balance.")
-        else: print("Error: Receiver not found or self-transfer.")
+        else: print("Error: Receiver not found or self transfer.")
