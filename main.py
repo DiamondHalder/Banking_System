@@ -10,7 +10,7 @@ from reports.statement import StatementGenerator
 def main():
     storage = DataStorage()
     accounts = storage.load_accounts()
-    txn_history = []
+    txn_history = storage.load_transactions()
     
     acc_mgr = AccountManager(accounts)
     trans_mgr = TransactionManager()

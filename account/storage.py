@@ -37,3 +37,32 @@ class DataStorage:
         except FileNotFoundError:
             print("[System] Starting with fresh data.")
         return accounts
+    def save_transaction(self, entry: dict, filename: str = "transaction_history.csv") -> None:
+        
+        try:
+            with open(filename, "a", newline="") as f:
+                writer = csv.DictWriter(f, fieldnames=["timestamp", "acc_no", "type", "amount"])
+                if f.tell() == 0:  
+                    writer.writeheader()
+                writer.writerow(entry)
+        except Exception as e:
+            print(f"Error saving transaction: {e}")
+
+    def load_transactions(self, filename: str = "transaction_history.csv") -> list[dict]:
+        transactions = []
+        try:
+            with open(filename, "r") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    transactions.append({
+                        "timestamp": row["timestamp"],
+                        "acc_no": int(row["acc_no"]),
+                        "type": row["type"],
+                        "amount": float(row["amount"])
+                    })
+        except FileNotFoundError:
+            print("[System] No previous transaction history found.")
+        except Exception as e:
+            print(f"Error loading transactions: {e}")
+
+        return transactions

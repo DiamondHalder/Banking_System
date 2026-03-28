@@ -1,5 +1,6 @@
 from tabulate import tabulate
 from datetime import datetime
+from account.storage import DataStorage
 
 
 def log_transaction(history_list: list[dict], acc_no: int, txn_type: str, amount: float) -> None:
@@ -10,6 +11,8 @@ def log_transaction(history_list: list[dict], acc_no: int, txn_type: str, amount
         "amount": amount
     }
     history_list.append(entry)
+    storage = DataStorage()
+    storage.save_transaction(entry)
 
 class HistoryManager:
    
