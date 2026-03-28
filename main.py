@@ -31,7 +31,7 @@ def main():
             if user:
                 while True:
                     print(f"\n>>> Active: {user.name}")
-                    u_menu = [["1", "Balance"], ["2", "Deposit"], ["3", "Withdraw"], ["4", "Transfer"], ["5", "History"], ["6", "Logout"]]
+                    u_menu = [["1", "Balance"], ["2", "Deposit"], ["3", "Withdraw"], ["4", "Transfer"], ["5", "History"], ["6", "Change PIN"], ["7", "Logout"]]
                     print(tabulate(u_menu, tablefmt="plain"))
                     c = input("\nAction: ").strip()
                     if c == "1": trans_mgr.check_balance(user)
@@ -46,12 +46,22 @@ def main():
                             stmt_gen.print_receipt(user.name, user.acc_no, "Withdraw", amt, user.balance)
                     elif c == "4": trans_mgr.transfer(user, accounts, txn_history)
                     elif c == "5": hist_mgr.view_history(txn_history, user.acc_no)
-                    elif c == "6": break
+                    elif c == "6": sec_mgr.change_pin(user)
+                    elif c == "7": break
         elif choice == "3":
             rep_mgr.show_bank_summary(accounts)
             rep_mgr.show_top_customers(accounts)
         elif choice == "4":
-            acc_mgr.update_profile()
+            print("\n--- Manage Profiles ---")
+            m_menu = [["1", "Update Profile"], ["2", "Close Account"], ["3", "Back"]]
+            print(tabulate(m_menu, headers=["Opt", "Action"], tablefmt="fancy_outline"))
+            m_choice = input("\nChoice: ").strip()
+            if m_choice == "1":
+             acc_mgr.update_profile()
+            elif m_choice == "2":
+             acc_mgr.close_account(txn_history)
+            elif m_choice == "3": continue
+            
         elif choice == "5":
             storage.save_accounts(accounts)
             print("Goodbye!"); break
