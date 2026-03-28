@@ -1,5 +1,6 @@
 from utils import prompt_int, prompt_non_empty
-from transaction.entity import Account
+from account.entity import Account
+from reports.history import log_transaction
 
 
 class TransactionManager:
@@ -33,6 +34,8 @@ class TransactionManager:
                 if prompt_non_empty("Enter PIN to confirm: ") == current_user.pin:
                     current_user.balance -= amount
                     receiver.balance += amount
+                    log_transaction(history_list, current_user.acc_no, f"To {target_id}", amount)
+                    log_transaction(history_list, receiver.acc_no, f"From {current_user.acc_no}", amount)
                     print("Transfer Successful!")
                 else: print("Error: Invalid PIN.")
             else: print("Error: Insufficient balance.")
