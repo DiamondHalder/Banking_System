@@ -1,11 +1,11 @@
 from tabulate import tabulate
-from member1_account.manager import AccountManager
-from member1_account.storage import DataStorage
-from member2_transaction.security import SecurityManager
-from member2_transaction.manager import TransactionManager
-from member3_reports.history import HistoryManager, log_transaction 
-from member3_reports.analytics import ReportManager
-from member3_reports.statement import StatementGenerator
+from account.manager import AccountManager
+from account.storage import DataStorage
+from transaction.security import SecurityManager
+from transaction.manager import TransactionManager
+from reports.history import HistoryManager, log_transaction 
+from reports.analytics import ReportManager
+from reports.statement import StatementGenerator
 
 def main():
     storage = DataStorage()
